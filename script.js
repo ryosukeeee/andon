@@ -36,7 +36,6 @@
 
 const Peer = window.Peer;
 (async function main() {
-  const localVideo = document.getElementById('js-local-stream');
   const localId = document.getElementById('js-local-id');
   const callTrigger = document.getElementById('js-call-trigger');
   const closeTrigger = document.getElementById('js-close-trigger');
@@ -44,6 +43,7 @@ const Peer = window.Peer;
   const remoteId = document.getElementById('js-remote-id');
   const meta = document.getElementById('js-meta');
   const sdkSrc = document.querySelector('script[src*=skyway]');
+  sleep(10000);
   const canvas = document.getElementById("defaultCanvas0");
 
   meta.innerText = `
@@ -60,10 +60,6 @@ const Peer = window.Peer;
  //   .catch(console.error);
 
   // Render local stream
-  localVideo.muted = true;
-  localVideo.srcObject = localStream;
-  localVideo.playsInline = true;
-  await localVideo.play().catch(console.error);
 
   const peer = (window.peer = new Peer( {
     key: "b506f34d-08c3-4fd3-95d8-c235a89619cf",
