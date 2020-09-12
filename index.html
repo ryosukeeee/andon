@@ -5,10 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>SkyWay - P2P Media example</title>
     <link rel="stylesheet" href="../_shared/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/p5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/addons/p5.dom.min.js"></script>
+    <script src="https://unpkg.com/ml5@latest/dist/ml5.min.js" type="text/javascript"></script>
   </head>
   <body>
     <div class="container">
-      <h1 class="heading">P2P Media example</h1>
       <p class="note">
         Enter remote peer ID to call.
       </p>
@@ -17,7 +19,6 @@
           <video id="js-remote-stream"></video>
         </div>
         <div class="local-stream">
-          <video id="js-local-stream"></video>
           <p>Your ID: <span id="js-local-id"></span></p>
           <input type="text" placeholder="Remote Peer ID" id="js-remote-id">
           <button id="js-call-trigger">Call</button>

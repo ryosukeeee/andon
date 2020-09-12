@@ -1,5 +1,40 @@
-const Peer = window.Peer;
+ let bodypix;
+ let video;
+ let segmentation;
+ let img;
+ let gazo;
 
+ const options = {
+   outputStride: 8, // 8, 16, or 32, default is 16
+   segmentationThreshold: 0.3 // 0 - 1, defaults to 0.5 
+ }
+
+ function preload(){
+   bodypix = ml5.bodyPix(options);
+   gazo = loadImage('andon.png');
+ }
+
+ function setup() {
+   createCanvas(1400, 1600);
+   video = createCapture(VIDEO);
+   video.size(400, 300);
+   bodypix.segment(video, gotResults)
+ }
+
+ function gotResults(err, result) {
+   if (err) {
+     console.log(err);
+     return;
+   }
+   segmentation = result;
+   background(255,255,255);
+   image(segmentation.backgroundMask, 650, 350, 266, 200);
+   filter(THRESHOLD, 0.99);
+   image(gazo, 10, 10,1600,750);
+   bodypix.segment(video, gotResults)
+ }
+
+const Peer = window.Peer;
 (async function main() {
   const localVideo = document.getElementById('js-local-stream');
   const localId = document.getElementById('js-local-id');
@@ -15,12 +50,13 @@ const Peer = window.Peer;
     SDK: ${sdkSrc ? sdkSrc.src : 'unknown'}
   `.trim();
 
-  const localStream = await navigator.mediaDevices
-    .getUserMedia({
-      audio: true,
-      video: true,
-    })
-    .catch(console.error);
+  const localStream = defaultCanvas0.captureStream(10);
+ // const localStream = await navigator.mediaDevices
+ //   .getUserMedia({
+ //     audio: true,
+ //     video: true,
+ //   })
+ //   .catch(console.error);
 
   // Render local stream
   localVideo.muted = true;
@@ -28,7 +64,7 @@ const Peer = window.Peer;
   localVideo.playsInline = true;
   await localVideo.play().catch(console.error);
 
-  const peer = (window.peer = new Peer({
+  const peer = (window.peer = new Peer( "KndwmQJMykERe9qg", {
     key: "b506f34d-08c3-4fd3-95d8-c235a89619cf",
     debug: 3,
   }));
