@@ -43,7 +43,11 @@ const Peer = window.Peer;
   const remoteId = document.getElementById('js-remote-id');
   const meta = document.getElementById('js-meta');
   const sdkSrc = document.querySelector('script[src*=skyway]');
-  sleep(10000);
+
+  //canvasの読み込みを待つ
+  const _sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+  await _sleep(10000);
+
   const canvas = document.getElementById("defaultCanvas0");
 
   meta.innerText = `
