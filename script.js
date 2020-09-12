@@ -44,13 +44,14 @@ const Peer = window.Peer;
   const remoteId = document.getElementById('js-remote-id');
   const meta = document.getElementById('js-meta');
   const sdkSrc = document.querySelector('script[src*=skyway]');
+  const canvas = document.getElementById("defaultCanvas0");
 
   meta.innerText = `
     UA: ${navigator.userAgent}
     SDK: ${sdkSrc ? sdkSrc.src : 'unknown'}
   `.trim();
 
-  const localStream = defaultCanvas0.captureStream(10);
+  const localStream = canvas.captureStream(10);
  // const localStream = await navigator.mediaDevices
  //   .getUserMedia({
  //     audio: true,
@@ -64,7 +65,7 @@ const Peer = window.Peer;
   localVideo.playsInline = true;
   await localVideo.play().catch(console.error);
 
-  const peer = (window.peer = new Peer( "KndwmQJMykERe9qg", {
+  const peer = (window.peer = new Peer( {
     key: "b506f34d-08c3-4fd3-95d8-c235a89619cf",
     debug: 3,
   }));
